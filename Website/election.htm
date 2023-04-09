@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <style>
+    body {
+      background-color: #f2f2f2;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      width: 60%;
+      margin: auto;
+      margin-top: 50px;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    h2 {
+      color: #666;
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+      border-radius: 10px;
+    }
+
+    li {
+      float: left;
+    }
+
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    li a:hover:not(.active) {
+      background-color: #111;
+    }
+
+    .active {
+      background-color: #4CAF50;
+    }
+
+    /* styles for the form */
+    form {
+      text-align: left;
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input[type=text],
+    select {
+      width: 50%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+    }
+
+    input[type=submit],
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+      /* add this line to set font */
+      font-size: 16px;
+      /* add this line to set font size */
+    }
+
+    input[type=submit]:hover,
+    button:hover {
+      background-color: #45a049;
+    }
+
+    /* styles for the navbar */
+    ul.navbar {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+      border-radius: 10px;
+    }
+
+    li.nav-item {
+      float: left;
+    }
+
+    li.nav-item a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    li.nav-item a:hover {
+      background-color: #111;
+    }
+
+    /* styles for validation success tick */
+    .validation {
+      position: relative;
+    }
+
+    .validation input[type="text"] {
+      padding-right: 30px;
+    }
+
+    .validation .success-tick {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 10px;
+      color: green;
+    }
+  </style>
+
+  <!-- <style>
+    body {
+        background-image: url('irish_flag.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style> -->
+
+
+
+
+  <title>Election</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <script>
+    function validateVoterID() {
+      // code to validate the voter ID at backend
+      // if validation is successful, enable the Party ID field and show the green tick mark
+      document.getElementById("partyID").disabled = false;
+      document.getElementById("voterIDValid").style.display = "inline-block";
+    }
+  </script>
+
+<script src="electionCaller.js"></script>
+
+</head>
+
+<body>
+  <div class="container">
+    <h1>Irish National Election Dashboard</h1>
+    <h2>Welcome, [username]</h2>
+    <ul>
+      <li><a href="voter_regis.htm">Register Voter</a></li>
+      <li><a href="political_party_regis.htm">Register Party</a></li>
+      <li><a href="voterVerification.htm">Election</a></li>
+    </ul>
+    <!-- form for registering a political party -->
+    <h2>Cast Your Vote</h2>
+
+    <form id="elecform">
+      <label for="voterID">Voter ID:</label>
+      <input type="text" id="voterID" name="voterID" required placeholder="Enter voter ID">
+      <input type="button" onclick="validateVoterID()" value="Validate">
+      <span id="voterIDValid" style="display:none; color:green;"><i class="fas fa-check"></i></span><br><br>
+
+      <label for="partyID">Party ID:</label>
+      <input type="text" id="partyID" name="partyID" disabled required placeholder="Enter Party ID"><br><br>
+
+      <button type="submit">Submit Vote</button>
+    </form>
+  </div>
+</body>
+
+</html>

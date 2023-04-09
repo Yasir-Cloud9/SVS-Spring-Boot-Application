@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Register Political Party</title>
+  <style>
+    body {
+      background-color: #f2f2f2;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      width: 60%;
+      margin: auto;
+      margin-top: 50px;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    h2 {
+      color: #666;
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+      border-radius: 10px;
+    }
+
+    li {
+      float: left;
+    }
+
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    li a:hover:not(.active) {
+      background-color: #111;
+    }
+
+    .active {
+      background-color: #4CAF50;
+    }
+
+    /* styles for the form */
+    /* Styles for the form */
+    form {
+      text-align: left;
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input[type=text],
+    select {
+      width: 50%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button[type=submit],
+    input[type=submit] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    input[type=submit]:hover {
+      background-color: #45a049;
+    }
+
+    /* styles for the navbar */
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+    }
+
+    li {
+      float: left;
+    }
+
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    li a:hover {
+      background-color: #111;
+    }
+  </style>
+
+  <!-- <style>
+    body {
+        background-image: url('irish_flag.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style> -->
+
+  <script src="PoliticalPartyCaller.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Irish National Election Dashboard</h1>
+    <h2>Welcome, [username]</h2>
+    <ul>
+      <li><a href="voter_regis.htm">Register Voter</a></li>
+      <li><a href="political_party_regis.htm">Register Party</a></li>
+      <li><a href="voterVerification.htm">Election</a></li>
+    </ul>
+    <h2>Register Political Party</h2>
+    <!-- form for registering a political party -->
+    <form id="ppform">
+
+      <label for="partyName">Political Party Name:</label>
+      <input type="text" id="partyNameId" name="partyName" placeholder="Enter political party name">
+
+      <label for="candidateName">Candidate Name:</label>
+      <input type="text" id="partyRepresentativeId" name="partyRepresentative" placeholder="Enter candidate name">
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Irish National Election Dashboard</title>
+    <style>
+      body {
+        background-color: #f2f2f2;
+        font-family: Arial, sans-serif;
+      }
+      
+      .container {
+        width: 60%;
+        margin: auto;
+        margin-top: 50px;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        text-align: center;
+      }
+      
+      h1 {
+        color: #333;
+      }
+      
+      h2 {
+        color: #666;
+      }
+      
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+        border-radius: 10px;
+      }
+
+      li {
+        float: left;
+      }
+
+      li a {
+        display: block;
+        color: white;
+        text-align: end;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+
+      li a:hover:not(.active) {
+        background-color: #111;
+      }
+
+      .active {
+        background-color: #4CAF50;
+      }
+      
+      /* Change styles for extra small screens */
+      @media screen and (max-width: 600px) {
+        .container {
+          width: 100%;
+        }
+      }
+      
+      /* Styles for the form */
+      form {
+        text-align: left;
+        margin-top: 20px;
+      }
+      
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      
+      input[type=text], select {
+        width: 50%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+      }
+      
+      input[type=submit] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      
+      input[type=submit]:hover {
+        background-color: #45a049;
+      }
+      
+      /* Styles for the calendar */
+      .calendar {
+        position: relative;
+        display: inline-block;
+      }
+      
+      .calendar-icon {
+        position: relative;
+        top: 3px;
+        right: 25px;
+        color: #aaa;
+        pointer-events: none;
+      }
+      
+      .calendar-input {
+        width: 150px;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+      }
+
+
+    </style>
+
+<!-- <style>
+  body {
+      background-image: url('irish_flag.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+  }
+</style> -->
+
+    <!-- Flatpickr CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<!-- Flatpickr JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script src="VoterRegisterCaller.js"></script>
+
+  </head>
+  <body>
+    <div class="container">
+      <h1>Irish National Election Dashboard</h1>
+      <h2>Welcome, [username]</h2>
+    <ul>
+      <li><a href="voter_regis.htm">Register Voter</a></li>
+      <li><a href="political_party_regis.htm">Register Party</a></li>
+      <li><a href="voterVerification.htm">Election</a></li>
+    </ul>
+      
+      <div id="voter-registration-form">
+        <h2>Register Voter</h2>
+        <form id="vrform">
+          <label for="voterName">Name:</label>
+          <input type="text" id="nameId" name="voterName" required placeholder="Enter Name Of Voter">
+          
+          <label for="voterGender">Gender:</label>
+          <select id="genderId" name="voterGender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+          
+          <label for="voterParentName">Parent Name:</label>
+          <input type="text" id="parent-nameId" name="voterParentName" required placeholder="Enter Parent Name Of Voter">
+          
+          <label for="voterPlaceOfBirth">Place of Birth:</label>
+          <input type="text" id="place-of-birthId" name="voterPlaceOfBirth" required placeholder="Enter Place Of Birth">
+          
+          <label for="voterDateOfBirth">Date of Birth:</label>
+          <div class="calendar">
+            <input type="text" id="date-of-birthId" name="voterDateOfBirth" class="calendar-input" required size="30" placeholder="YYYY-MM-DD">
+            <i class="fa fa-calendar calendar-icon"></i>
+          </div>
+          
+          
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+      
+      
+      <!-- Scripts -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+      <script>
+        // Calendar code
+        const calendarInput = document.getElementById('date-of-birth');
+        const calendarIcon = document.querySelector('.calendar-icon');
+
+        calendarIcon.addEventListener('click', () => {
+          calendarInput.focus();
+        });
+
+        calendarInput.addEventListener('focus', () => {
+          calendarIcon.style.color = '#333';
+        });
+
+        calendarInput.addEventListener('blur', () => {
+          calendarIcon.style.color = '#aaa';
+        });
+      </script>
+      
+      <script>
+        flatpickr("#date-of-birth", {
+          dateFormat: "Y-m-d",
+          maxDate: "today",
+          defaultDate: ""
+        });
+      </script>
+      
+  </body>
+</html>
+
