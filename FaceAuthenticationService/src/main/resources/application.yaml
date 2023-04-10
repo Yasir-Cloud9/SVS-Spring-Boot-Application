@@ -8,8 +8,8 @@ server:
     max-age: 3600
 
 aws:
-  access-key: AKIA3QASOSVXN7EJEIMZ
-  secret-key: 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
+  access-key: TBD
+  secret-key: TBD
 
 spring:
   datasource:
