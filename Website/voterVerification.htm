@@ -132,8 +132,8 @@
         <h1>Irish National Election Dashboard</h1>
         <h2>Welcome, [username]</h2>
         <ul>
-            <li><a href="voter_regis.htm">Register Voter</a></li>
-            <li><a href="political_party_regis.htm">Register Party</a></li>
+            <li><a href="voterRegister.htm">Register Voter</a></li>
+            <li><a href="politicalPartyRegister.htm">Register Party</a></li>
             <li><a href="voterVerification.htm">Election</a></li>
         </ul>
         <!-- form for verifying voter details -->
@@ -177,10 +177,10 @@
                 </tr>
             </table>
 
-            <p><input type="checkbox" id="confirm-checkbox" onchange="enableButton()"> I confirm that the above details
+            <p><input type="checkbox" id="checkbox"> I confirm that the above details
                 belong to me.</p>
             <!-- <a href="election.htm"><button id="confirm-button" disabled>Confirm Voter Details</button></a> -->
-            <button id="confirm-button" disabled onclick="redirectToElection()">Confirm Voter Details</button>
+            <button id="redirectButton"  style="display:none;" onclick=onclick="location.href='election.htm'">Confirm Voter Details</button>
 
 
         </form>
@@ -188,23 +188,38 @@
     </div>
 </body>
 
-<script src="fetchVoterDetails.js"></script>
+<script src="voterVerification_helper.js"></script>
 
+<script>
+const checkbox = document.getElementById('checkbox');
+const button = document.getElementById('redirectButton');
+
+checkbox.addEventListener('change', function() {
+    if(this.checked) {
+    button.style.display = 'block';
+  } else {
+    button.style.display = 'none';
+  }
+});
+</script>
+
+<!-- 
 <script type="text/javascript">
     function enableButton() {
         var checkbox = document.getElementById("confirm-checkbox");
         var button = document.getElementById("confirm-button");
 
         if (checkbox.checked == true) {
-            button.disabled = false;
+            button.removeAttribute("disabled");
         } else {
-            button.disabled = false;
+            button.setAttribute("disabled", ""); 
         }
     }
-</script>
+</script> -->
 
 <script>
     function redirectToElection() {
+        event.defaultPrevented
         window.location.href = "election.htm";
     }
 </script>

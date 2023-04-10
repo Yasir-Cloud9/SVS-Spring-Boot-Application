@@ -1,0 +1,48 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: API-GATEWAY
+  config:
+    import: configserver:http://localhost:9296
+  cloud:
+    gateway:
+      routes:
+        - id : VOTER-SERVICE
+          uri: lb://VOTER-SERVICE
+          predicates:
+            - Path=/v1/voter/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: VOTER-SERVICE
+                fallbackuri: forward:/voterServiceFallBack
+        - id: PARTY-SERVICE
+          uri: lb://PARTY-SERVICE
+          predicates:
+            - Path=/v1/party/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: PARTY-SERVICE
+                fallbackuri: forward:/partyServiceFallBack
+        - id: FACE-RECOG-SERVICE
+          uri: lb://FACE-RECOG-SERVICE
+          predicates:
+            - Path=/v1/compare-faces/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: FACE-RECOG-SERVICE
+                fallbackuri: forward:/faceRecogServiceFallBack
+        - id: VOTER-SERVICE
+          uri: lb://ELECTION-SERVICE
+          predicates:
+            - Path=/v1/election/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: ELECTION-SERVICE
+                fallbackuri: forward:/electionServiceFallBack
+

@@ -1,4 +1,4 @@
-function fetchVoterDetails() {
+function voterVerification_helper() {
     const form = document.querySelector('#vvform');
     const submitButton = document.querySelector('#fetch-btn');
     const apiUrl = 'http://localhost:8085/v1/voter'; // replace with your API endpoint
@@ -33,6 +33,43 @@ function fetchVoterDetails() {
                     alert('You have already voted!');
                     location.reload();
                 }
+                
+                //**Verification for face start from here */
+                var voterPhotos ={
+                    photo1: data.voterID + ".jpg",
+                    photo2: data.voterID + "_" + data.voterID + ".jpg"
+                }
+
+                const apiUrl_election = 'http://localhost:8088/v1/compare-faces';
+                fetch(apiUrl_election, {
+                    method: 'POST',
+                    body: JSON.stringify(voterPhotos),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                })
+                .then(response => 
+                    {
+
+                          // If the response is not OK (i.e. 200 status code), throw an error
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                // Otherwise, parse the response body as JSON and return it
+                return response.text();
+
+                       
+                    }) // parse the response as JSON
+                .then(data => {
+                    if( data=="False" || data=="Error")
+                    {
+                        alert("Photo identification failed.");
+                        location.reload();
+                    }
+                    console.log('Response from server:', data); // log the response data to the console
+                    // do something with the response data, such as update the UI
+                })
+
 
             })
             .catch(error => {
@@ -41,4 +78,4 @@ function fetchVoterDetails() {
             });
     })
 }
-document.addEventListener('DOMContentLoaded', fetchVoterDetails);
+document.addEventListener('DOMContentLoaded', voterVerification_helper);

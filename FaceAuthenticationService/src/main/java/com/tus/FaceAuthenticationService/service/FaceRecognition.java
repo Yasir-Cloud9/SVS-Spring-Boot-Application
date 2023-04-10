@@ -15,17 +15,15 @@ public class FaceRecognition {
     @Autowired
     AmazonRekognition amazonRekognition;
 
-    public String CompareFaces(String photo1, String photo2, String bucketName) {
+    public String CompareFaces(String photo1, String photo2) {
 
-//        String photo_1 = "Shubham_1.jpg";
-//        String photo_2 = "Shubham_2.jpg";
-//        String bucketName_1 = "smart-voting-face-recognition";
+        String bucketName = "smart-voting-face-recognition";
 
         CompareFacesRequest compareFacesRequest = new CompareFacesRequest().withSourceImage(new Image()
                 .withS3Object(new S3Object()
-                        .withName(photo1).withBucket(bucketName))).withTargetImage(new Image()
+                        .withName("Source/" + photo1).withBucket(bucketName))).withTargetImage(new Image()
                 .withS3Object(new S3Object()
-                        .withName(photo2).withBucket(bucketName))).withSimilarityThreshold(80F);
+                        .withName("Target/" + photo2).withBucket(bucketName))).withSimilarityThreshold(80F);
 
         try {
 
@@ -36,17 +34,17 @@ public class FaceRecognition {
 
             if (!lists.isEmpty()) {
                 for (CompareFacesMatch label : lists) {
-                    log.info(label.getFace() + ": Similarity is " + label.getSimilarity().toString());
-                    return "Similarity : " + label.getSimilarity().toString();
+                    log.info("Similarity between two faces : " + label.getSimilarity().toString());
+                    return "True";
                 }
             } else {
                 log.info("Faces Does not match");
-                return "Face does not match";
+                return "False";
             }
         } catch (AmazonRekognitionException e) {
             e.printStackTrace();
         }
         log.info("Some Error happened. Check Code.");
-        return "Some Error happened. Check Code.";
+        return "Error";
     }
 }

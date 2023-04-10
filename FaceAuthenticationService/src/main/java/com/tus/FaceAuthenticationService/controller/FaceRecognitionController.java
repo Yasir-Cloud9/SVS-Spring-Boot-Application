@@ -19,8 +19,16 @@ public class FaceRecognitionController
     @PostMapping()
     public ResponseEntity<String> faceRecognition(@RequestBody FaceRecognitionRequest faceRecognitionRequest)
     {
-        String similarity = faceRecognition.CompareFaces(faceRecognitionRequest.getPhoto1(),faceRecognitionRequest.getPhoto2(),faceRecognitionRequest.getBucketName());
+        String similarity = faceRecognition.CompareFaces(faceRecognitionRequest.getPhoto1(),faceRecognitionRequest.getPhoto2());
         //String similarity = faceRecognition.CompareFaces("Shubham_1.jpg", "Shubham_2.jpg", "smart-voting-face-recognition");
-        return new ResponseEntity<>(similarity,HttpStatus.OK);
+        if(similarity == "True")
+        {
+            return new ResponseEntity<>(similarity,HttpStatus.OK);
+        }
+        else if (similarity == "False")
+        {
+            return new ResponseEntity<>(similarity,HttpStatus.OK);
+        }
+        return new ResponseEntity<>(similarity,HttpStatus.EXPECTATION_FAILED);
     }
 }
