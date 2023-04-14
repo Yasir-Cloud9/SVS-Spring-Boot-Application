@@ -20,9 +20,9 @@ public class ElectionController
     @PostMapping()
     public ResponseEntity<String> conductElection(@RequestBody ElectionRequest electionRequest)
     {
-        electionService.conductElection(electionRequest);
-        log.info("Vote casted");
-        return new ResponseEntity<>("Vote casted successfully to the party with ID : " + electionRequest.getPartyID(), HttpStatus.ACCEPTED);
+        String voteStatus = electionService.conductElection(electionRequest);
+        log.info(voteStatus);
+        return new ResponseEntity<>(voteStatus, HttpStatus.OK);
     }
 
 }

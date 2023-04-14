@@ -30,10 +30,17 @@ public class VoterController
         return new ResponseEntity<>(voterResponse, HttpStatus.OK);
     }
 
-    @PutMapping("/reset-vote-status")
-    public ResponseEntity<String> resetVoteStatus()
+    @PutMapping("/reset-all-vote-status")
+    public ResponseEntity<String> resetAllVoteStatus()
     {
-        voterService.resetVoteStatus();
+        voterService.resetAllVoteStatus();
         return new ResponseEntity<>("Voter status of vote casted is reset successfully.", HttpStatus.OK);
+    }
+
+    @PutMapping("/set-vote-status/{id}")
+    public ResponseEntity<String> setVoteStatus(@PathVariable("id") long voterID)
+    {
+        String voterOperationStatus = voterService.setVoteStatus(voterID);
+        return new ResponseEntity<>(voterOperationStatus, HttpStatus.OK);
     }
 }

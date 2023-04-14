@@ -15,8 +15,10 @@ public class FaceRecognition {
     @Autowired
     AmazonRekognition amazonRekognition;
 
-    public String CompareFaces(String photo1, String photo2) {
+    public String CompareFaces(String voterID) {
 
+        String photo1 = voterID + ".jpg";
+        String photo2 = voterID + "_" + voterID + ".jpg";
         String bucketName = "smart-voting-face-recognition";
 
         CompareFacesRequest compareFacesRequest = new CompareFacesRequest().withSourceImage(new Image()
@@ -24,7 +26,6 @@ public class FaceRecognition {
                         .withName("Source/" + photo1).withBucket(bucketName))).withTargetImage(new Image()
                 .withS3Object(new S3Object()
                         .withName("Target/" + photo2).withBucket(bucketName))).withSimilarityThreshold(80F);
-
         try {
 
             CompareFacesResult result = amazonRekognition.compareFaces(compareFacesRequest);

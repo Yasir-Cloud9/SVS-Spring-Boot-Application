@@ -10,13 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.beans.BeanUtils.copyProperties;
 
 @Service
 @Log4j2
-public class VoterServiceImpl implements VoterService
-{
+public class VoterServiceImpl implements VoterService {
     @Autowired
     private VoterRepository voterRepository;
 
@@ -63,7 +63,7 @@ public class VoterServiceImpl implements VoterService
     }
 
     @Override
-    public String resetVoteStatus() {
+    public String resetAllVoteStatus() {
         List<Voter> voters = voterRepository.findAll();
         for (Voter voter : voters) {
             voter.setVoterVoted(false);
@@ -71,5 +71,20 @@ public class VoterServiceImpl implements VoterService
         voterRepository.saveAll(voters);
         log.info("Voter status of vote casted is reset successfully.");
         return "Voter status of vote casted is reset successfully.";
+    }
+
+    @Override
+    public String setVoteStatus(long voterID) {
+        Optional<Voter> voterOptional = voterRepository.findById(voterID);
+        if (voterOptional.isPresent()) {
+            Voter voter = voterOptional.get();
+            voter.setVoterVoted(true);
+            voterRepository.save(voter);
+            log.info("Voter status updated for voter with ID: {}", voterID);
+            return "Voter status updated for voter with ID: " + voterID;
+        } else {
+            log.error("Voter with ID {} not found", voterID);
+            throw new VoterServiceCustomException("Voter with ID " + voterID + " not found", "VOTER_NOT_FOUND");
+        }
     }
 }

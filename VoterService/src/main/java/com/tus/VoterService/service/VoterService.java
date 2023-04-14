@@ -10,5 +10,7 @@ public interface VoterService
 
     VoterResponse getVoterByID(long voterID);
 
-    String resetVoteStatus();
+    String resetAllVoteStatus();
+
+    String setVoteStatus(long voterID);
 }
